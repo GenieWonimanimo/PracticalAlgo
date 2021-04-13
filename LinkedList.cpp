@@ -5,7 +5,7 @@ const int MX = 1000005;
 int dat[MX], pre[MX], nxt[MX];
 int unused = 1;
 
-void Insert(int addr, int num){ // addr 번지 뒤에 num을 추가
+void insert(int addr, int num){ // addr 번지 뒤에 num을 추가
     dat[unused] = num;
     pre[unused] = addr;
     nxt[unused] = nxt[addr];
@@ -13,13 +13,13 @@ void Insert(int addr, int num){ // addr 번지 뒤에 num을 추가
     nxt[addr] = unused;
     unused++;
 }
-
-void Erase(int addr){ // addr 번지의 원소를 제거
+ 
+void erase(int addr){ // addr 번지의 원소를 제거
     nxt[pre[addr]] = nxt[addr];
     if (nxt[addr] != -1) pre[nxt[addr]] = pre[addr];
 }
 
-void Traverse(){
+void traverse(){
   int cur = nxt[0];
   while(cur != -1){
     cout << dat[cur] << ' ';
@@ -28,35 +28,35 @@ void Traverse(){
   cout << "\n\n";
 }
 
-void Insert_test(){
+void insert_test(){
   cout << "****** insert_test *****\n";
-  Insert(0, 10); // 10(address=1)
-  Traverse();
-  Insert(0, 30); // 30(address=2) 10
-  Traverse();
-  Insert(2, 40); // 30 40(address=3) 10
-  Traverse();
-  Insert(1, 20); // 30 40 10 20(address=4)
-  Traverse();
-  Insert(4, 70); // 30 40 10 20 70(address=5)
-  Traverse();
+  insert(0, 10); // 10(address=1)
+  traverse();
+  insert(0, 30); // 30(address=2) 10
+  traverse();
+  insert(2, 40); // 30 40(address=3) 10
+  traverse();
+  insert(1, 20); // 30 40 10 20(address=4)
+  traverse();
+  insert(4, 70); // 30 40 10 20 70(address=5)
+  traverse();
 }
 
-void Erase_test(){
+void erase_test(){
   cout << "****** erase_test *****\n";
-  Erase(1); // 30 40 20 70
-  Traverse();
-  Erase(2); // 40 20 70
-  Traverse();
-  Erase(4); // 40 70
-  Traverse();
-  Erase(5); // 40
-  Traverse();
+  erase(1); // 30 40 20 70
+  traverse();
+  erase(2); // 40 20 70
+  traverse();
+  erase(4); // 40 70
+  traverse();
+  erase(5); // 40
+  traverse();
 }
 
 int main(void) {
   fill(pre, pre+MX, -1);
   fill(nxt, nxt+MX, -1);
-  Insert_test();
-  Erase_test();
+  insert_test();
+  erase_test();
 }
