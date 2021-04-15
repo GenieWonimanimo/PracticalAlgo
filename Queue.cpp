@@ -6,11 +6,12 @@ int dat[MX];
 int head = 0, tail = 0; // head는 가장 앞에 있는 원소의 인덱스, tail은 가장 뒤에 있는 원소의 인덱스 + 1
 
 void push(int x) {
-    dat[tail++] = x;
+    dat[tail] = x;
+    tail = (tail + 1) % MX;
 }
 
 void pop() {
-    head++;
+    head = (head + 1) % MX;
 }
 
 int front() {
@@ -18,7 +19,7 @@ int front() {
 }
 
 int back() {
-    return dat[tail - 1];
+    return dat[(tail == 0 ? MX - 1 : tail - 1)];
 }
 
 bool isEmpty() {
